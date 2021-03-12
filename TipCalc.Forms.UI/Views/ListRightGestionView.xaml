@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage x:TypeArguments="viewModels:ListRightGestionVM"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+             xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
+             xmlns:viewModels="clr-namespace:TipCalc.Core.ViewModels;assembly=TipCalc.Core"
+             x:Class="TipCalc.Forms.UI.Views.ListRightGestionView"
+             mvx:Bi.nd="Title PageTitle"
+             x:Name="ListRightGestionViewPage">
+    
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" Margin="15">
+
+            <StackLayout Orientation="Vertical">
+                <Label Text="Add username to share this list with him." />
+
+                <StackLayout Orientation="Horizontal">
+                    <Entry Text="{Binding NewUserName}" Placeholder="Username" HorizontalOptions="FillAndExpand" />
+                    <Button Text="ADD" Command="{Binding NewUserRightCommand}" HorizontalOptions="End" />
+                </StackLayout>
+
+                <Label Text="{Binding ConfirmOrErrorEntry}" TextColor="{Binding ConfirmOrErrorEntryColorText}" />
+            </StackLayout>
+
+
+            <CollectionView ItemsSource="{Binding UsersWithRight}" IsGrouped="False" >
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <StackLayout Grid.Column="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <Label Text="{Binding Name}" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" />
+                            <ImageButton BackgroundColor="Transparent" Grid.Column="3" Source="ic_delete.png" HeightRequest="40" Padding="7" Command="{Binding DataContext.DeleteUserRightCommand, Source={x:Reference ListRightGestionViewPage}}" CommandParameter="{Binding Name}" />
+                        </StackLayout>
+                        
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </StackLayout>
+    </ContentPage.Content>
+    
+</views:MvxContentPage>
